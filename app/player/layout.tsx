@@ -1,7 +1,9 @@
+import type { ReactNode } from 'react';
+
 export const dynamic = 'force-dynamic';
 export const revalidate: false | number = 0;
 export const fetchCache = 'force-no-store';
 
-export default function PlayerLayout({ children }: { children: React.ReactNode }) {
+export default function PlayerLayout({ children }: { children: ReactNode }) {
   return children; // full-screen; no header
 }
