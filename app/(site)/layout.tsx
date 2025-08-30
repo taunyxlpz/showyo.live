@@ -1,6 +1,8 @@
+import type { ReactNode } from 'react';
+
 export const revalidate: false | number = false;
 
-export default function SiteLayout({ children }: { children: React.ReactNode }) {
+export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <header className="w-full flex items-center gap-3 px-4 py-3 border-b border-white/10 bg-black/70">
