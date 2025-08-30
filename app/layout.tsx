@@ -1,5 +1,5 @@
 import './globals.css';
-import React from 'react';
+import type { ReactNode } from 'react';
 
 export const viewport = {
   width: 'device-width',
@@ -9,10 +9,12 @@ export const viewport = {
 
 export const revalidate: false | number = false;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="h-full">
-      <body className="min-h-dvh bg-black text-white antialiased">{children}</body>
+      <body className="min-h-dvh bg-black text-white antialiased">
+        {children}
+      </body>
     </html>
   );
 }
