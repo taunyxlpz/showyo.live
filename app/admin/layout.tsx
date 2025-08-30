@@ -8,7 +8,7 @@ import Link from 'next/link';
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <section>
-      <nav style={{ display: 'flex', gap: 12, padding: '12px 0' }}>
+      <nav style={{ display:'flex', gap:12, padding:'12px 0' }}>
         <Link href="/admin/marketing">Marketing</Link>
         <Link href="/admin">Overview</Link>
       </nav>
