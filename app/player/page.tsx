@@ -8,20 +8,14 @@ export const revalidate: false | number = 0;
 export const fetchCache = 'force-no-store';
 
 type Item = { key: string; url?: string; duration?: number };
-
-function isVideo(src: string) {
-  return /\.(mp4|mov|m4v|webm|avi)$/i.test(src);
-}
+const isVideo = (src: string) => /\.(mp4|mov|m4v|webm|avi)$/i.test(src);
 
 export default function PlayerPage() {
   return (
     <Suspense
       fallback={
-        <div style={{
-          position:'fixed', inset:0, background:'#000', color:'#fff',
-          display:'flex', alignItems:'center', justifyContent:'center',
-          fontFamily:'system-ui, sans-serif'
-        }}>
+        <div style={{position:'fixed',inset:0,background:'#000',color:'#fff',
+          display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'system-ui, sans-serif'}}>
           Loading…
         </div>
       }
@@ -41,7 +35,7 @@ function PlayerCore() {
   const refreshMs = Math.max(5000, Number(q.get('refreshMs') || '15000'));
   const showOverlay = q.get('overlay') === '1';
 
-  // TB60 fix: allow forced width/height via URL
+  // TB60: allow forced width/height via URL
   const forcedW = Math.max(0, Number(q.get('w') || '0'));
   const forcedH = Math.max(0, Number(q.get('h') || '0'));
 
@@ -50,6 +44,7 @@ function PlayerCore() {
   const [idx, setIdx] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Size canvas (forced w/h beats viewport; works around TB60 400x400 quirk)
   useEffect(() => {
     const apply = () => {
       const w = forcedW || Math.max(1, Math.floor(window.innerWidth || document.documentElement.clientWidth || 0));
@@ -72,6 +67,7 @@ function PlayerCore() {
     return () => { window.removeEventListener('resize', apply); window.removeEventListener('orientationchange', apply); clearInterval(id); };
   }, [bg, forcedW, forcedH]);
 
+  // Fetch playlist
   async function load() {
     try {
       const r = await fetch('/api/playlist', { cache: 'no-store' });
@@ -82,15 +78,13 @@ function PlayerCore() {
         url: it.url || (it.key ? `/api/file?key=${encodeURIComponent(it.key)}` : ''),
         duration: Number(it.duration || 10),
       }));
-      if (items.length) {
-        setList(items);
-        setIdx((i) => (i >= items.length ? 0 : i));
-      }
+      if (items.length) { setList(items); setIdx((i) => (i >= items.length ? 0 : i)); }
     } catch { /* keep last */ }
   }
 
   useEffect(() => { load(); const id = setInterval(load, refreshMs); return () => clearInterval(id); }, [refreshMs]);
 
+  // Advance to next item by duration
   useEffect(() => {
     if (!list.length) return;
     if (timerRef.current) clearTimeout(timerRef.current);
@@ -101,7 +95,6 @@ function PlayerCore() {
 
   const src = list.length ? (list[idx].url || '') : '';
   const mediaIsVideo = useMemo(() => (src ? isVideo(src) : false), [src]);
-
   const objectFit = fit === 'stretch' ? ('fill' as const) : fit === 'contain' ? ('contain' as const) : ('cover' as const);
 
   const outer: React.CSSProperties = { position:'fixed', top:0, left:0, width:`${wh.w || 1}px`, height:`${wh.h || 1}px`, background:bg, overflow:'hidden' };
@@ -111,12 +104,12 @@ function PlayerCore() {
   return (
     <div id="player-root" style={outer}>
       <div style={stage}>
-        {src ? (mediaIsVideo ? (
-          <video key={src} src={src} style={media} muted playsInline autoPlay controls={false} preload="auto" />
-        ) : (
-          <img key={src} src={src} style={media} alt="" />
-        )) : null}
+        {src ? (mediaIsVideo
+          ? <video key={src} src={src} style={media} muted playsInline autoPlay controls={false} preload="auto" />
+          : <img key={src} src={src} style={media} alt="" />
+        ) : null}
       </div>
+
       {showOverlay && (
         <div style={{ position:'absolute', left:8, bottom:6, color:'#fff', font:'12px system-ui', opacity:0.7, pointerEvents:'none', textShadow:'0 1px 2px rgba(0,0,0,.7)' }}>
           {fit.toUpperCase()} • Z{zoom} • R{rotate}° • {wh.w}×{wh.h}
