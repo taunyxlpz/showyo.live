@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 
-import SafeImage from '@/app/components/SafeImage';
+import SafeImage from '../../components/SafeImage';
 
 export default function UploadPage() {
   return (
@@ -14,7 +14,8 @@ export default function UploadPage() {
         height={60}
         className="mb-4 h-auto w-auto"
       />
-      {/* Your upload UI here (if interactive, make that part a 'use client' component). */}
+      {/* Your upload UI here.
+          If a section needs onClick/onChange, move that part into its own 'use client' component. */}
     </main>
   );
 }
