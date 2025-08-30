@@ -3,13 +3,9 @@ export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 
 import React from 'react';
-import BrandLogo from '../components/BrandLogo'; // ← relative import (no "@/")
+import BrandLogo from '../components/BrandLogo';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
