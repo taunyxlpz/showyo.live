@@ -1,8 +1,11 @@
-export default function Success() {
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
+export default function SuccessPage() {
   return (
-    <div className="container">
-      <h1>Payment successful</h1>
-      <p className="muted">Thanks! Check your email for the upload link.</p>
-    </div>
+    <main className="p-6">
+      <h1 className="text-2xl font-semibold">Payment successful ✅</h1>
+    </main>
   );
 }
