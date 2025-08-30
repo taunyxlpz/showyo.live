@@ -1,11 +1,9 @@
-// Optional runtime flags if your layout reads cookies/headers or does dynamic stuff.
-// Remove if you prefer, they won't hurt.
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 
 import React from 'react';
-import BrandLogo from '../components/BrandLogo';
+import BrandLogo from '../components/BrandLogo'; // ← relative import (no "@/")
 
 export default function RootLayout({
   children,
