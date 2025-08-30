@@ -1,8 +1,11 @@
-export default function Cancel() {
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
+export default function CancelPage() {
   return (
-    <div className="container">
-      <h1>Payment canceled</h1>
-      <p className="muted">No charge was made. You can try again anytime.</p>
-    </div>
+    <main className="p-6">
+      <h1 className="text-2xl font-semibold">Payment canceled ❌</h1>
+    </main>
   );
 }
