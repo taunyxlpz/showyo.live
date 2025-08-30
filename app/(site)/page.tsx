@@ -14,7 +14,7 @@ export default function Home() {
           Accepted: JPG, PNG, WEBP, MP4, MOV (≤ 200 MB). Videos must be ≥ 10 seconds.
           <br />
           Moderation blocks: Nudity & sexual content (incl. minors), Hate/racism, Violence & gore,
-          Illegal activity (drugs, weapons, terrorism), Harassment/threats, Self-harm & suicide.
+          Illegal activity (drugs, weapons, terrorism), Harassment/threats, Self-harm.
         </p>
       </div>
     </div>
