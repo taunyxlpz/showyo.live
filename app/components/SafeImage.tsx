@@ -8,7 +8,6 @@ export default function SafeImage(props: ImageProps) {
   const { alt, className, ...rest } = props;
 
   if (errored) {
-    // Simple fallback you can style however you like
     return (
       <div role="img" aria-label={alt} className={className || ''}>
         {alt}
@@ -21,7 +20,6 @@ export default function SafeImage(props: ImageProps) {
       {...rest}
       alt={alt}
       className={className}
-      // Handler stays INSIDE the client component
       onError={() => setErrored(true)}
     />
   );
