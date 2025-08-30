@@ -14,7 +14,6 @@ export default function Page() {
         height={80}
         className="h-auto w-auto"
       />
-      {/* TODO: put your existing homepage JSX here if you want */}
     </main>
   );
 }
