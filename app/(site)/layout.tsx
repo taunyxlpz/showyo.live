@@ -1,16 +1,23 @@
-import type { ReactNode } from 'react';
-import BrandLogo from '@/components/BrandLogo';
+// Optional runtime flags if this segment does any dynamic work.
+// Safe to keep; remove if you want.
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 
-export const revalidate: false | number = false;
+import React from 'react';
+import BrandLogo from '../../components/BrandLogo';
 
-export default function SiteLayout({ children }: { children: ReactNode }) {
+export default function SiteLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <>
-      <header className="w-full flex items-center gap-3 px-4 py-3 border-b border-white/10 bg-black/70">
-        <BrandLogo className="h-6 w-auto" />
-        <span className="text-sm opacity-70">ShowYo</span>
-      </header>
-      <main className="w-full">{children}</main>
-    </>
+    <section>
+      <nav className="p-4">
+        <BrandLogo className="h-auto w-auto" />
+      </nav>
+      <div>{children}</div>
+    </section>
   );
 }
