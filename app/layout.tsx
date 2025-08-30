@@ -1,37 +1,24 @@
-import type { Metadata, Viewport } from 'next';
-import './globals.css';
-import BrandLogo from '@/components/BrandLogo';
-
-export const metadata: Metadata = {
-  title: 'ShowYo',
-  description: 'ShowYo Digital Signage',
-  icons: [{ rel: 'icon', url: '/favicon.ico' }],
-};
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-};
-
-export const revalidate = false;
+// Optional runtime flags if your layout reads cookies/headers or does dynamic stuff.
+// Remove if you prefer, they won't hurt.
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+import React from 'react';
+import BrandLogo from '../components/BrandLogo';
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body style={{ background: '#000', color: '#fff', margin: 0 }}>
-        <header style={{
-          display: 'flex', alignItems: 'center', gap: 12,
-          padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,.1)',
-          background: 'rgba(0,0,0,.7)'
-        }}>
-          <BrandLogo className="h-6 w-auto" />
-          <span style={{ font: '14px system-ui', opacity: .7 }}>ShowYo</span>
+      <body>
+        <header className="p-4">
+          <BrandLogo className="h-auto w-auto" />
         </header>
-        <main>{children}</main>
+        {children}
       </body>
     </html>
   );
