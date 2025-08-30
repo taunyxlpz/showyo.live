@@ -5,7 +5,8 @@ export const fetchCache = 'force-no-store';
 export default function CancelPage() {
   return (
     <>
-      <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0 }}>Payment canceled ❌</h1>
+      <h1>Payment canceled ❌</h1>
+      <p>You can try again from the Home page.</p>
     </>
   );
 }
