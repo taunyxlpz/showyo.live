@@ -1,15 +1,13 @@
-'use client';
+import Image from 'next/image';
 
-import { useState } from 'react';
-
-export default function BrandLogo({ className = 'h-6 w-auto' }: { className?: string }) {
-  const [src, setSrc] = useState('/logo.png'); // put a real logo in public/logo.png
+export default function BrandLogo({ className = '' }: { className?: string }) {
   return (
-    <img
-      src={src}
+    <Image
+      src="/ShowYo Yellow.png"
       alt="ShowYo"
+      width={240}
+      height={80}
       className={className}
-      onError={() => setSrc('/favicon.ico')} // harmless client-side fallback
     />
   );
 }
